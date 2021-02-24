@@ -22,7 +22,7 @@ title: Mash-97
 email: mahimnhd97@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Yoh! It's me in short Mash. As for introduction, you can find me through 
-some hizzy works that are hubbed here at -> https://github.com/mash-97
+  some hizzy works that are hubbed here at -> https://github.com/mash-97
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
