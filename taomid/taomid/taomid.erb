@@ -1,0 +1,16 @@
+<% set_layout("layouts/default_layout.erb", title: "taomid") %>
+<% for element in @elements %>
+  <h3>Name: <%= element.name %></h3>
+  <h3>vibe: </h3>
+  <p><%= element.vibe %></p>
+  <h3>Images: </h3>
+  <% element.images.each do |image_path| %>
+    <img src="<%= include_asset(image_path) %>" alt="<%= element.name %>">
+  <% end %>
+  <h3>Songs: </h3>
+  <audio controls>
+  <% element.songs.each do |song_path| %>
+    <source src="<%= include_asset(song_path) %>" type="audio/mpeg">
+  <% end %>
+  </audio>
+<% end %>
