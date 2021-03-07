@@ -6,8 +6,12 @@
 	
 	<body>
 		{%- include header.html -%}
-		{{content}}
-		{%- include footer.html -%}
+		
+		<div class="container-fluid">
+			{{content}}
+			<hr>
+			{%- include footer.html -%}
+		</div>
 		{%- include footer_scripts.html -%}
 	</body>
 </html>
