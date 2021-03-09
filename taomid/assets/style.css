@@ -1,1 +1,59 @@
+.container-fluid{
+  width: 600px;
+  margin: 0px auto;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  padding: 5px;
+}
+.navbar{
+  border: 2px solid black;
+  padding: 5px;
+  height: 50px;
+  background-color: #332255;
+  color: black;
+}
 
+img{
+  display: block; 
+  width: 500px; 
+  border: 1px solid black; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+.row{ 
+  padding-bottom: 50px;
+  padding-top: 20px;  
+  margin-bottom: 30px;
+} 
+
+.color-background{
+  background-color: rgba(87, 136, 116, 0.6);   
+}
+.jumbotron{
+  background-color: rgba(9, 9, 9, 0.3);
+}
+hr{
+	      
+  background-color: rgba(0,0,0,0.7);
+}  
+.footer-hr{
+  width: 100%;
+  border: 2px solid black;
+  background-color: black; 
+}  
+.audio-container{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}  
+audio{
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
+} 
+.audio-name{
+  font-weight: bold; 
+  padding-bottom: 3px; 
+}
+	

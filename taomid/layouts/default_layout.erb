@@ -1,10 +1,13 @@
 <!DOCUMENT html>
 <html>
   <head>
-    <%= include_granule("granules/html_head.erb", title: @page_data[:title]) %>
+    <%= include_granule("granules/meta_tags.erb") %>
+    <title><%= @page_data[:title] %></title>
+    <%= include_granule("granules/css_styles.erb") %>
+
   </head>
 
-  <body>
+  <body class="color-background">
     <%= @page_content %>
   </body>
 </html>

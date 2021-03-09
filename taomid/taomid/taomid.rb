@@ -8,6 +8,7 @@ class Taomid < Shpg::Page
     # initialize your data here
     require_relative("elements")
     @elements = ELEMENTS
+    @taomid_vb = File.read(File.join(__dir__, "assets/taomid.vb"))
   end
   
 end

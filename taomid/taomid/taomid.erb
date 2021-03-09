@@ -1,16 +1,56 @@
-<% set_layout("layouts/default_layout.erb", title: "taomid") %>
-<% for element in @elements %>
-  <h3>Name: <%= element.name %></h3>
-  <h3>vibe: </h3>
-  <p><%= element.vibe %></p>
-  <h3>Images: </h3>
-  <% element.images.each do |image_path| %>
-    <img src="<%= include_asset(image_path) %>" alt="<%= element.name %>">
+<% set_layout("layouts/default_layout.erb", title: "Mash-97 | TheArtOfMyInnateDomain") %>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand mr-3">Mash-97</a>
+  </div>    
+</nav>
+
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h1 class="text-center text-capitalize">The Art of My Innate Domain</h1>
+    <p class="lead"><%= @taomid_vb %></p>
+  </div>
+  
+  <% for element in @elements %>
+  <div class="row justify-content-center" id="<%= element.name %>">
+    <div class="col justify-content-center">
+      <h2 class="text-center"><%= element.name.split("_").map(&:capitalize).join() %></h2> 
+      
+      <% if element.images.size > 0 %>
+      <img class="img-fluid" src="<%= include_asset(element.images[0]) %>" alt="<%= element.name %>">
+      <% end %>
+      
+      <p class="text-center text-justify"><%= element.vibe %></p>
+      
+      <% if element.songs.size!=0 %>
+      <div class="audio-name text-center"><%= File.basename(element.songs[0]).split(File.extname(element.songs[0]))[0] %></div>
+      <div class="audio-container">
+	<audio controls>
+	
+	  <% for song_path in element.songs %>
+	  <source src="<%= include_asset(song_path) %>" type="audio/mpeg"> 
+	  <% end %>
+	  
+	</audio>
+      </div> 
+      <% end %>
+      
+    </div>
+  </div>
   <% end %>
-  <h3>Songs: </h3>
-  <audio controls>
-  <% element.songs.each do |song_path| %>
-    <source src="<%= include_asset(song_path) %>" type="audio/mpeg">
-  <% end %>
-  </audio>
-<% end %>
+  
+  <!-- Footer -->
+  <hr class="footer-hr">
+  <footer class="footer">
+    <div class="row">
+      <div class="col">
+	<a href="https://github.com/mash-97">
+	  <i class="fa fa-github"></i> mash-97
+	</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
