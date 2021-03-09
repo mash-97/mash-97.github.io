@@ -1,43 +1,39 @@
 <% set_layout("layouts/default_layout.erb", title: "Mash-97 | TheArtOfMyInnateDomain") %>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
-  <div class="container-fluid">
-    <a href="/" class="navbar-brand mr-3">Mash-97</a>
-  </div>    
+<nav class="w3-top w3-bar w3-black w3-padding w3-card w3-wide">
+  <a href="/" class="w3-bar-item w3-button w3-hover-text-purple">Mash-97</a>   
 </nav>
 
-<div class="container-fluid">
-  <div class="jumbotron">
-    <h1 class="text-center text-capitalize">The Art of My Innate Domain</h1>
-    <p class="lead"><%= @taomid_vb %></p>
+<div class="w3-container w3-brown w3-padding-32">
+  <div class="w3-center w3-jumbo w3-padding-32 w3-dark-gray">
+    <h1 class="w3-wide">The Art of My Innate Domain</h1>
+    <p class="w3-opacity w3-cursive"><%= @taomid_vb %></p>
   </div>
   
   <% for element in @elements %>
-  <div class="row justify-content-center" id="<%= element.name %>">
-    <div class="col justify-content-center">
-      <h2 class="text-center"><%= element.name.split("_").map(&:capitalize).join() %></h2> 
-      
-      <% if element.images.size > 0 %>
-      <img class="img-fluid" src="<%= include_asset(element.images[0]) %>" alt="<%= element.name %>">
-      <% end %>
-      
-      <p class="text-center text-justify"><%= element.vibe %></p>
-      
-      <% if element.songs.size!=0 %>
+  <section class="w3-container w3-center" id="<%= element.name %>">
+    <h2 class="text-center element-header"><%= element.name.split("_").map(&:capitalize).join(" ") %></h2> 
+    
+    <% if element.images.size > 0 %>
+    <img class="img-fluid" src="<%= include_asset(element.images[0]) %>" alt="<%= element.name %>">
+    <% end %>
+    
+    <p class="text-center text-justify"><%= element.vibe %></p>
+    
+    <% if element.songs.size!=0 %>
+    
+    <div class="audio-container">
       <div class="audio-name text-center"><%= File.basename(element.songs[0]).split(File.extname(element.songs[0]))[0] %></div>
-      <div class="audio-container">
-	<audio controls>
-	
-	  <% for song_path in element.songs %>
-	  <source src="<%= include_asset(song_path) %>" type="audio/mpeg"> 
-	  <% end %>
-	  
-	</audio>
-      </div> 
-      <% end %>
+      <audio controls>
       
-    </div>
-  </div>
+	<% for song_path in element.songs %>
+	<source src="<%= include_asset(song_path) %>" type="audio/mpeg"> 
+	<% end %>
+	
+      </audio>
+    </div> 
+    <% end %>
+  </section>
   <% end %>
   
   <!-- Footer -->
