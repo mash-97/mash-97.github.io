@@ -1,18 +1,10 @@
-
-s = Time.now
-%x{shpg generate}
-e = Time.now
-l = e-s
-d = l
-while d <= l do
-  puts("Before: d,l: #{[d,l].to_s}") 
+while true do 
   s = Time.now
-  %x{shpg generate}
+  puts %x[shpg generate]
   e = Time.now
-  l = d
-  d = e-s
-  puts("After: d,l: #{[d,l].to_s}")
-  puts()
+  puts("Execution time: #{e-s}")
+  puts("================================")
+  if ARGV[0].to_i>0 and ARGV[0].to_i<10 then sleep(ARGV[0].to_i) else sleep(2) end
+  puts ARGV.to_s
 end
-
 

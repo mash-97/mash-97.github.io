@@ -1,29 +1,29 @@
 <% set_layout("layouts/default_layout.erb", title: "Mash-97 | TheArtOfMyInnateDomain") %>
 
-<nav class="w3-top w3-bar w3-black w3-padding w3-card w3-wide">
-  <a href="/" class="w3-bar-item w3-button w3-hover-text-purple">Mash-97</a>   
+<nav class="w3-bar w3-black w3-padding w3-card w3-wide w3-xlarge">
+  <a href="/" class="w3-bar-item w3-button w3-hover-text-purple w3-ripple">Mash-97</a>   
 </nav>
 
-<div class="w3-container w3-brown w3-padding-32">
-  <div class="w3-center w3-jumbo w3-padding-32 w3-dark-gray">
-    <h1 class="w3-wide">The Art of My Innate Domain</h1>
-    <p class="w3-opacity w3-cursive"><%= @taomid_vb %></p>
+<div class="w3-container w3-card w3-brown w3-padding-32">
+  <div class="w3-center w3-container w3-padding-32 w3-dark-gray">
+    <h1 class="w3-wide w3-jumbo">The Art of My Innate Domain</h1>
+    <p class="w3-opacity w3-cursive w3-xxlarge"><%= @taomid_vb %></p>
   </div>
   
   <% for element in @elements %>
-  <section class="w3-container w3-center" id="<%= element.name %>">
+  <section class="w3-container w3-center w3-card w3-padding-64" id="<%= element.name %>">
     <h2 class="text-center element-header"><%= element.name.split("_").map(&:capitalize).join(" ") %></h2> 
     
     <% if element.images.size > 0 %>
-    <img class="img-fluid" src="<%= include_asset(element.images[0]) %>" alt="<%= element.name %>">
+    <img class="w3-image w3-round" src="<%= include_asset(element.images[0]) %>" alt="<%= element.name %>">
     <% end %>
     
-    <p class="text-center text-justify"><%= element.vibe %></p>
+    <p class="w3-justify"><%= element.vibe %></p>
     
     <% if element.songs.size!=0 %>
     
-    <div class="audio-container">
-      <div class="audio-name text-center"><%= File.basename(element.songs[0]).split(File.extname(element.songs[0]))[0] %></div>
+    <div class="w3-container w3-center">
+      <div class="w3-opacity"><%= File.basename(element.songs[0]).split(File.extname(element.songs[0]))[0] %></div>
       <audio controls>
       
 	<% for song_path in element.songs %>
@@ -35,18 +35,15 @@
     <% end %>
   </section>
   <% end %>
-  
-  <!-- Footer -->
-  <hr class="footer-hr">
-  <footer class="footer">
-    <div class="row">
-      <div class="col">
-	<a href="https://github.com/mash-97">
-	  <i class="fa fa-github"></i> mash-97
-	</a>
-      </div>
-    </div>
-  </footer>
 </div>
 
+<footer class="w3-container w3-black w3-center">
+  <% @contacts.each do |type, slugs| %>
+  <div class="w3-panel">
+    <a href="<%= slugs[:url] %>" class="w3-button">
+      <i class="fa fa-<%= type %>"></i> <%= slugs[:name] %>
+    </a>
+  </div>
+  <% end %>
+</footer>
 

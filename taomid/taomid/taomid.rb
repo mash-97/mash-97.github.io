@@ -9,6 +9,11 @@ class Taomid < Shpg::Page
     require_relative("elements")
     @elements = ELEMENTS
     @taomid_vb = File.read(File.join(__dir__, "assets/taomid.vb"))
+    @contacts = {
+      "github" => {:name => "mash-97", :url => "https://github.com/mash-97"}, 
+      "facebook" => {:name => "Mashiur Rahman", :url => "https://www.facebook.com/mashiurrahman.mahim2"}
+    }
+            
   end
   
 end
