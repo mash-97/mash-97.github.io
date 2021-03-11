@@ -36,7 +36,7 @@ class Element
   # 
   def initialize(**kwargs)
     @name = kwargs[:name]
-    @header_name = @name.split("_").map(&:capitalize).join(" ")
+    @header_name = @name.snakify.split("_").map(&:capitalize).join(" ")
     @id_name = @name.snakify
     @audio_container_id_name = "audio_"+@id_name
     @vibe = Kramdown::Document.new(kwargs[:vibe]).to_html
