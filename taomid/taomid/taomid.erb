@@ -1,40 +1,49 @@
 <% set_layout("layouts/default_layout.erb", title: "Mash-97 | TheArtOfMyInnateDomain") %>
 
 <nav class="w3-bar w3-black w3-padding w3-card w3-wide w3-xlarge">
-  <a href="/" class="w3-bar-item w3-button w3-hover-text-purple w3-ripple">Mash-97</a>   
+  <a href="/" class="w3-bar-item w3-hover-text-purple w3-ripple dec-none">Mash-97</a>   
 </nav>
 
-<div class="w3-container w3-card w3-brown w3-padding-32">
-  <div class="w3-center w3-container w3-padding-32 w3-dark-gray">
+<div class="w3-container w3-center w3-brown w3-padding-32 background-brown-opacity">
+  <div class="w3-card w3-center w3-container w3-padding-32 w3-dark-gray">
     <h1 class="w3-wide w3-jumbo">The Art of My Innate Domain</h1>
     <p class="w3-opacity w3-cursive w3-xxlarge"><%= @taomid_vb %></p>
   </div>
   
+  <div class="w3-panel w3-card-4 w3-cyan w3-round w3-center">
+    <p><%= @taomid_notice_vb %></p>
+  </div>
+  
   <% for element in @elements %>
-  <section class="w3-container w3-center w3-card w3-padding-64" id="<%= element.name %>">
-    <h2 class="text-center element-header"><%= element.name.split("_").map(&:capitalize).join(" ") %></h2> 
+  <section class="w3-card w3-center w3-padding-64 element-container w3-margin-top w3-margin-bottom" id="<%= element.id_name %>">
+    <h2 class="w3-text-dark-gray use-font-sofia"><%= element.header_name %></h2> 
     
     <% if element.images.size > 0 %>
-    <img class="w3-image w3-round" src="<%= include_asset(element.images[0]) %>" alt="<%= element.name %>">
+    <img class="w3-image w3-round" src="<%= include_asset(element.images[0].path) %>" alt="<%= element.images[0].name %>">
     <% end %>
     
-    <p class="w3-justify"><%= element.vibe %></p>
+    <div class="w3-container w3-justify w3-padding-16 w3-text-black w3-large"><%= element.vibe %></div>
     
-    <% if element.songs.size!=0 %>
-    
+    <% if element.songs.size > 0 %>
     <div class="w3-container w3-center">
-      <div class="w3-opacity"><%= File.basename(element.songs[0]).split(File.extname(element.songs[0]))[0] %></div>
-      <audio controls>
-      
-	<% for song_path in element.songs %>
-	<source src="<%= include_asset(song_path) %>" type="audio/mpeg"> 
-	<% end %>
-	
-      </audio>
+      <div class="w3-opacity" id="<%= element.id_name %>_audio_name"><%= element.songs[0].name %></div>
+      <div class="audio-container">
+	<span class="w3-button" onclick="<%= element.id_name %>Prev();"><i class="fa fa-arrow-circle-left"></i></span>
+	<audio controls class="w3-margin-top" id="<%= element.id_name %>_audio_player">
+	  <source src="<%= include_asset(element.songs[0].path) %>" type="audio/mpeg"> 
+	</audio>
+	<span class="w3-button" onclick="<%= element.id_name %>Next();"><i class="fa fa-arrow-circle-right"></i></span>
+      </div>
     </div> 
     <% end %>
+    
   </section>
   <% end %>
+  
+  <div class="w3-panel w3-card-4 w3-cyan w3-round w3-center">
+    <p>Check out Zayn at: <a class="w3-hover-text-white dec-none" href="https://www.youtube.com/channel/UC3PdiRW5dUA4V70ueeR1eHA"> <i class="fa fa-youtube"> Zayn</i></a></p>
+  </div>
+  
 </div>
 
 <footer class="w3-container w3-black w3-center">
@@ -47,3 +56,83 @@
   <% end %>
 </footer>
 
+<script type="text/javascript">
+class Player{
+  constructor(songs, audio_name_element, audio_player){
+    this.songs = songs;
+    this.audio_name_element = audio_name_element;
+    this.audio_player = audio_player;
+    this.current_index = -1;
+    if(this.songs.length>0)
+    {
+      this._initializeFor(this.songs[this.current_index+1]);
+      this.current_index = 0;
+    }
+    else
+      this._zeroInitialize();
+  }
+  
+  _zeroInitialize(){
+    this.audio_player.pause();
+    this.audio_player.src = "";
+    this.audio_name_element.innerText = "Song not available!";
+  }
+  _initializeFor(song){
+    this._zeroInitialize();
+    this.audio_player.src = song.url;
+    this.audio_name_element.innerText = song.name;
+  }
+  next(){
+    if(this.songs.length==0)
+      return false;
+    
+    this.current_index += 1;
+    if(this.current_index >= this.songs.length)
+      this.current_index = 0;
+      
+    this._initializeFor(this.songs[this.current_index]);
+    this.audio_player.play();
+  }
+  prev(){
+    if(this.songs.length==0) 
+      return false;
+    
+    this.current_index -= 1;
+    if(this.current_index < 0){
+      this.current_index = this.songs.length-1;
+    }
+    this._initializeFor(this.songs[this.current_index]);
+    this.audio_player.play();
+  }
+}
+
+let audio_name_element;
+let audio_player;
+let songs;
+
+<% @elements.each do |element| %>
+
+songs = [ 
+  <% element.songs.each do |song| %>
+  {name: "<%= song.name %>", url: "<%= include_asset(song.path) %>"},
+  <% end %>
+];
+
+audio_name_element = document.getElementById("<%= element.id_name %>_audio_name");
+audio_player = document.getElementById("<%= element.id_name %>_audio_player");
+
+var <%= element.id_name %>_player = new Player(songs, audio_name_element, audio_player);
+function <%= element.id_name %>Next(){
+  <%= element.id_name %>_player.next();
+}
+function <%= element.id_name%>Prev(){
+  <%= element.id_name %>_player.prev();
+}
+
+function pauseAllAudio(){
+  document.querySelectorAll("audio").forEach((audio)=>{audio.pause();});
+}
+
+<% end %>
+
+</script>

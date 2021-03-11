@@ -5,5 +5,5 @@ And your smells that I'm consuming. Feels like we are using each-other.
 It's not like these feelings are the only things that try to. 
 I got other strings too! Damn! Who cares! I got things to do. 
 Gonna make a random-recursive-nested feelings from all of those and simplify 
-those no matter how deep these are! and gotta carve the abstracted one onto your body. 
+those no matter how deep those are! and gotta carve the abstracted one onto your body. 
 A part of your body where no one but me with the will-free granted permission.
