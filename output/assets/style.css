@@ -1,0 +1,44 @@
+/*
+
+
+.audio-container{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+ 
+
+.audio-name{
+  font-weight: bold; 
+  padding-bottom: 3px; 
+}
+
+
+*/
+
+img{
+  display: block; 
+  width: 500px; 
+  border: 1px solid black; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+.element-container{
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: 0px auto;
+}
+
+.dec-none{
+  text-decoration: none;
+}
+
+.use-font-sophia{
+  font-family: Sofia, sans-serif;
+}
+
+.background-brown-opacity{
+  background: rgba(165, 42, 42, 0.5);
+}
